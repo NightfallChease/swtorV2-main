@@ -78,7 +78,7 @@ namespace SWTOR_External
         private string wallhackAOB = "74 0D 83 4B 68 01";
         private string wallhack2AOB = "0F 84 76 02 00 00 49 8B CE";
         private string infReachAOB = "67 FD FF 8B 06 89 07 41 80 0F 0C";
-        private string camCollisionAOB = "F3 0F 11 8F ?? ?? 00 00 0F";
+        private string camCollisionAOB = "F3 0F 11 8F ?? ?? 00 00 0F B6 4F ??";
         private string camCollisionAddrStr;
         private bool camCollisionEnabled = false;
         private bool infReachEnabled = false;
