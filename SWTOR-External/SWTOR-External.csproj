@@ -280,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="customLocations.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Hotkeys.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
