@@ -23,9 +23,9 @@ namespace SWTOR_External
 {
     public partial class Form1 : MaterialForm
     {
-        Random rnd = new Random();
-        Mem m = new Mem();
-        InputSimulator sim = new InputSimulator();
+        readonly Random rnd = new Random();
+        readonly Mem m = new Mem();
+        readonly InputSimulator sim = new InputSimulator();
 
         /* Todo:
         MouseTP (for map and world)
@@ -180,12 +180,12 @@ namespace SWTOR_External
         private byte[] speedPatchedBytes;
         private bool speedPatched;
         private UIntPtr pbasecaveAddr;
-        private bool isPVPEnabled = false;
+        //private bool isPVPEnabled = false;
         private string PbaseUintString;
         //private string PVPAOB = "50 00 56 00 ?? 00 00 00 ?? ?? ?? ?? ?? ?? 00 00";
         //private string PVPAOB = "50 00 56 00 ?? 00 00 00 ?? ?? ?? ?? ?? 7D 00 00 ?? ?? ?? ?? ??";
-        private string pvpAddrStr;
-        private UIntPtr pvpAddr;
+        //private string pvpAddrStr;
+        //private UIntPtr pvpAddr;
         private bool isSpeedhackEnabled = false;
         public byte[] noclipPatchedBytes = { };
         public byte[] cameraPatchedBytes = { };
@@ -201,7 +201,7 @@ namespace SWTOR_External
         public byte[] gotoCaveBytes = { };
         public byte[] infReachAlreadyPatchedBytes = { };
         public byte[] infReachOriginalBytes = { 0x89, 0x07, 0x41, 0x80, 0x0F, 0x0C };
-        private bool stuckPatched = false;
+        //private bool stuckPatched = false;
         private string stuckAddrStr;
         private UIntPtr stuckAddrUint;
         private List<customLocation> locationList;
@@ -271,22 +271,22 @@ namespace SWTOR_External
         }
 
         #region Timer
-        private void pvpTimer_Tick(object sender, EventArgs e)
-        {
-            pvpAddrStr = pvpAddrStr ?? "00";
-            string isPvPEnabledAddr = convertUintToHexString(pvpAddr + 0x4);
-            if (pvpAddrStr != "00")
-            {
-                int pvpByte = m.ReadByte(isPvPEnabledAddr);
-                if (pvpByte != 0x45)
-                {
-                    pvpTimer.Stop();
-                    cbox_noclip.Checked = false;
-                    MessageBox.Show("PvP detected!\nPlease disable PvP to continue using the tool");
-                    Environment.Exit(0);
-                }
-            }
-        }
+        ////private void pvpTimer_Tick(object sender, EventArgs e)
+        ////{
+        ////    pvpAddrStr = pvpAddrStr ?? "00";
+        ////    string isPvPEnabledAddr = convertUintToHexString(pvpAddr + 0x4);
+        ////    if (pvpAddrStr != "00")
+          //  {
+          //      int pvpByte = m.ReadByte(isPvPEnabledAddr);
+          //      if (pvpByte != 0x45)
+          //      {
+          //          pvpTimer.Stop();
+          //          cbox_masterSwitch.Checked = false;
+          //          MessageBox.Show("PvP detected!\nPlease disable PvP to continue using the tool");
+          //          Environment.Exit(0);
+          //      }
+          //  }
+        ////}
         private void mainTimer_Tick_1(object sender, EventArgs e)
         {
             //AntiDebug
@@ -576,18 +576,18 @@ namespace SWTOR_External
                 darkmodeEnabled = false;
             }
         }
-        private void cbox_noclip_CheckedChanged_1(object sender, EventArgs e)
+        private void cbox_masterSwitch_CheckedChanged_1(object sender, EventArgs e)
         {
             Thread codeCaveThread = new Thread(createCodeCave);
 
-            if (cbox_noclip.ForeColor != Color.Green)
+            if (cbox_masterSwitch.ForeColor != Color.Green)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                cbox_noclip.ForeColor = Color.Green;
+                cbox_masterSwitch.ForeColor = Color.Green;
             }
             else
             {
-                cbox_noclip.ForeColor = Color.Red;
+                cbox_masterSwitch.ForeColor = Color.Red;
             }
             //MessageBox.Show("Try to not disable this function or it may cause errors");
 
@@ -907,7 +907,7 @@ namespace SWTOR_External
             }
             else
             {
-                logToConsole("No hotkey settings found.\n");
+                logToConsole("No hotkey settings found.\r\n");
             }
         }
         private void SetControlColors(Control.ControlCollection controls, Color backColor, Color foreColor)
@@ -989,11 +989,13 @@ namespace SWTOR_External
                 //}
 
                 //AOB Scans
-                IntPtr moduleStart = m.GetModuleAddressByName("swtor.exe");
-                long moduleStartLong = long.Parse(moduleStart.ToString());
+                IntPtr moduleStart = m.GetModuleAddressByName("swtor.exe"); //get start of module
+                long moduleStartLong = long.Parse(moduleStart.ToString()); //parse it to long
+                long moduleEndLong = moduleStartLong + 10000000;
+
                 infJumpAddrStr = m.AoBScan(infJumpAOB).Result.Sum().ToString("X2");
                 noclipAddressStr = m.AoBScan(noclipAOB).Result.Sum().ToString("X2");
-                cameraAddress = m.AoBScan(moduleStartLong, moduleStartLong + 10000000, cameraAOB).Result.Sum().ToString("X2");
+                cameraAddress = m.AoBScan(moduleStartLong, moduleEndLong, cameraAOB).Result.Sum().ToString("X2");
                 cameraZAddress = m.AoBScan(cameraZAOB).Result.Sum().ToString("X2");
                 cameraYAddress = m.AoBScan(cameraYAOB).Result.Sum().ToString("X2");
                 nofallAddrString = m.AoBScan(nofallAOB).Result.Sum().ToString("X2");
@@ -1025,7 +1027,7 @@ namespace SWTOR_External
                 log_console.Invoke((MethodInvoker)delegate
                 {
                     log_console.Text = log_console.Text + $"\r\nInitialization success";
-                    cbox_noclip.Enabled = true;
+                    cbox_masterSwitch.Enabled = true;
                 });
 
                 //MessageBox.Show("AOB scan success");
@@ -2302,82 +2304,6 @@ namespace SWTOR_External
         }
         #endregion
 
-        #region Scripting
-        private void ExecuteScript(string code)
-        {
-            var materialSkinAssemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MaterialSkin.dll"); // Load MaterialSkin.dll from local folder
-            if (!File.Exists(materialSkinAssemblyPath))
-            {
-                MessageBox.Show("MaterialSkin assembly not found.");
-                return;
-            }
-
-            var memoryAssemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "memory.dll"); // Load memory.dll from local folder
-            if (!File.Exists(memoryAssemblyPath))
-            {
-                MessageBox.Show("Memory assembly not found.");
-                return;
-            }
-
-            var scriptOptions = ScriptOptions.Default
-                .AddReferences(typeof(Form1).Assembly.Location, materialSkinAssemblyPath, memoryAssemblyPath)
-                .AddImports("System", "System.Windows.Forms", "MaterialSkin", "MaterialSkin.Controls");
-
-            var globals = new ScriptGlobals
-            {
-                tool = this,
-                mem = new Mem()
-                //Hier könnten auch weitere Variablen eingefügt werden
-            };
-
-            try
-            {
-                var script = CSharpScript.Create(code, scriptOptions, typeof(ScriptGlobals));
-                var scriptState = script.RunAsync(globals).Result;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Script execution failed: {ex.Message}");
-            }
-        }
-        public class ScriptGlobals
-        {
-            public Form1 tool { get; set; }
-            public Mem mem { get; set; } //Initialize the 'm' object here
-        }
-
-        private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.Text = materialTabControl1.SelectedTab.Text;
-        }
-
-        private void lbl_Speed_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_ZBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_YBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_XBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtbox_TPUpKey_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
         #region structs
         [Serializable]
         public struct customLocation
@@ -2387,7 +2313,6 @@ namespace SWTOR_External
             public float customY;
             public float customZ;
         }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             openDiscord();
@@ -2407,18 +2332,11 @@ namespace SWTOR_External
             lbl_credits4.Text = $"Count : {creditClickerCount}";
             pnl_creditClicker.BackColor = Color.FromArgb(rnd.Next(255), rnd.Next(255), rnd.Next(255));
         }
-
-
-
-
-
+        private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Text = materialTabControl1.SelectedTab.Text;
+        }
         #endregion
 
-    }
-    public class customLocation
-    {
-        public string customName { get; set; } // The name of the location
-        public double X { get; set; }          // X-coordinate of the location
-        public double Y { get; set; }          // Y-coordinate of the location
     }
 }

@@ -54,7 +54,7 @@
             this.lbl_coords = new System.Windows.Forms.Label();
             this.lbl_cons = new System.Windows.Forms.Label();
             this.log_console = new System.Windows.Forms.TextBox();
-            this.cbox_noclip = new System.Windows.Forms.CheckBox();
+            this.cbox_masterSwitch = new System.Windows.Forms.CheckBox();
             this.trck_opcacity = new System.Windows.Forms.TrackBar();
             this.lbl_opacity = new System.Windows.Forms.Label();
             this.box_playerHeight = new System.Windows.Forms.TextBox();
@@ -247,7 +247,6 @@
             this.lbl_Speed.Size = new System.Drawing.Size(111, 13);
             this.lbl_Speed.TabIndex = 23;
             this.lbl_Speed.Text = "Custom Speed (Risky)";
-            this.lbl_Speed.Click += new System.EventHandler(this.lbl_Speed_Click);
             // 
             // trckbr_speed
             // 
@@ -316,7 +315,6 @@
             this.txt_ZBox.Size = new System.Drawing.Size(55, 20);
             this.txt_ZBox.TabIndex = 17;
             this.tipControl.SetToolTip(this.txt_ZBox, "coord for new location");
-            this.txt_ZBox.TextChanged += new System.EventHandler(this.txt_ZBox_TextChanged);
             // 
             // txt_YBox
             // 
@@ -326,7 +324,6 @@
             this.txt_YBox.Size = new System.Drawing.Size(55, 20);
             this.txt_YBox.TabIndex = 16;
             this.tipControl.SetToolTip(this.txt_YBox, "coord for new location");
-            this.txt_YBox.TextChanged += new System.EventHandler(this.txt_YBox_TextChanged);
             // 
             // txt_XBox
             // 
@@ -336,7 +333,6 @@
             this.txt_XBox.Size = new System.Drawing.Size(55, 20);
             this.txt_XBox.TabIndex = 15;
             this.tipControl.SetToolTip(this.txt_XBox, "coord for new location");
-            this.txt_XBox.TextChanged += new System.EventHandler(this.txt_XBox_TextChanged);
             // 
             // box_alwaysInFront
             // 
@@ -433,21 +429,21 @@
             this.log_console.Size = new System.Drawing.Size(141, 265);
             this.log_console.TabIndex = 3;
             // 
-            // cbox_noclip
+            // cbox_masterSwitch
             // 
-            this.cbox_noclip.AutoSize = true;
-            this.cbox_noclip.Enabled = false;
-            this.cbox_noclip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbox_noclip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbox_noclip.ForeColor = System.Drawing.Color.Red;
-            this.cbox_noclip.Location = new System.Drawing.Point(6, 6);
-            this.cbox_noclip.Name = "cbox_noclip";
-            this.cbox_noclip.Size = new System.Drawing.Size(103, 17);
-            this.cbox_noclip.TabIndex = 2;
-            this.cbox_noclip.Text = "Master-Switch";
-            this.tipControl.SetToolTip(this.cbox_noclip, "Hook the game and make the features work");
-            this.cbox_noclip.UseVisualStyleBackColor = true;
-            this.cbox_noclip.CheckedChanged += new System.EventHandler(this.cbox_noclip_CheckedChanged_1);
+            this.cbox_masterSwitch.AutoSize = true;
+            this.cbox_masterSwitch.Enabled = false;
+            this.cbox_masterSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbox_masterSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbox_masterSwitch.ForeColor = System.Drawing.Color.Red;
+            this.cbox_masterSwitch.Location = new System.Drawing.Point(6, 6);
+            this.cbox_masterSwitch.Name = "cbox_masterSwitch";
+            this.cbox_masterSwitch.Size = new System.Drawing.Size(103, 17);
+            this.cbox_masterSwitch.TabIndex = 2;
+            this.cbox_masterSwitch.Text = "Master-Switch";
+            this.tipControl.SetToolTip(this.cbox_masterSwitch, "Hook the game and make the features work");
+            this.cbox_masterSwitch.UseVisualStyleBackColor = true;
+            this.cbox_masterSwitch.CheckedChanged += new System.EventHandler(this.cbox_masterSwitch_CheckedChanged_1);
             // 
             // trck_opcacity
             // 
@@ -571,7 +567,7 @@
             this.tabPage1.Controls.Add(this.log_console);
             this.tabPage1.Controls.Add(this.lbl_version);
             this.tabPage1.Controls.Add(this.box_speedhack);
-            this.tabPage1.Controls.Add(this.cbox_noclip);
+            this.tabPage1.Controls.Add(this.cbox_masterSwitch);
             this.tabPage1.Controls.Add(this.box_glide);
             this.tabPage1.Controls.Add(this.lbl_cons);
             this.tabPage1.Controls.Add(this.lbl_Speed);
@@ -1507,8 +1503,8 @@
             // 
             // pvpTimer
             // 
-            this.pvpTimer.Interval = 10000;
-            this.pvpTimer.Tick += new System.EventHandler(this.pvpTimer_Tick);
+            //this.pvpTimer.Interval = 10000;
+            //this.pvpTimer.Tick += new System.EventHandler(this.pvpTimer_Tick);
             // 
             // Form1
             // 
@@ -1546,7 +1542,7 @@
         #endregion
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.Timer mainTimer;
-        private System.Windows.Forms.CheckBox cbox_noclip;
+        private System.Windows.Forms.CheckBox cbox_masterSwitch;
         private System.Windows.Forms.TextBox log_console;
         private System.Windows.Forms.Label lbl_cons;
         private System.Windows.Forms.Label lbl_coords;
