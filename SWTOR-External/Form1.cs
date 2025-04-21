@@ -132,8 +132,8 @@ namespace SWTOR_External
         private Vector3 lastPos;
         private bool darkmodeEnabled;
         private readonly string urlRunning = "https://github.com/NightfallChease/s/blob/main/isRunning.sw";
-        private readonly string urlUpdate = "https://github.com/NightfallChease/s/blob/main/version9.2.sw";
-        private readonly string currentVersion = "v9.2";
+        private readonly string urlUpdate = "https://github.com/NightfallChease/s/blob/main/version9.2.1.sw";
+        private readonly string currentVersion = "v9.2.1";
         private bool noclipPatched;
         private bool cameraPatched;
         private bool cameraZPatched;
@@ -163,10 +163,8 @@ namespace SWTOR_External
         private readonly string nofallAOB = "F3 44 0F 10 4F 10 44 0F 28 DF";
         private readonly string speedHackAOB = "F3 0F 10 BE DC 00 00 00 0F 28 F7";
         private readonly string devESPAob = "0F 84 ?? ?? ?? ?? B9 06 00 00 00 41 FF D4 48 BE";
-
         private readonly string velocityIndicatorAOB =
             "74 1F B9 ?? ?? ?? ?? 41 FF D6 4C 8D 45 D0 B9 ?? ?? ?? ?? 48 89 F2 FF D7 48 8B 4D D0 FF D0 41 FF D7";
-
         private readonly string glideAOB = "F3 44 0F 11 43 14 F3 0F";
         private readonly string wallhackAOB = "74 0D 83 4B 68 01";
         private readonly string wallhack2AOB = "0F 84 76 02 00 00 49 8B CE";
@@ -528,12 +526,12 @@ namespace SWTOR_External
             if (flyModeEnabled)
             {
                 box_noCollision.Checked = true;
-                box_noCamCollision.Checked = true;
+                //box_noCamCollision.Checked = true;
             }
             else
             {
                 box_noCollision.Checked = false;
-                box_noCamCollision.Checked = false;
+                //box_noCamCollision.Checked = false;
             }
         }
 
@@ -1566,8 +1564,8 @@ namespace SWTOR_External
             {
                 byte[] patched_bytes =
                 {
-                    0x83, 0xBF, 0xCC, 0x00, 0x00, 0x00, 0x00, 0x0F, 0x85, 0x07, 0x00, 0x00, 0x00, 0x48, 0x89, 0x3D,
-                    0x0D, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x10, 0x87, 0xD0, 0x03, 0x00, 0x00
+                    0x81, 0x7F, 0x4C, 0xF4, 0x7D, 0x00, 0x00, 0x0F, 0x85, 0x07, 0x00, 0x00, 0x00, 0x48, 0x89, 
+                    0x3D, 0x0D, 0x00, 0x00, 0x00, 0xF3, 0x0F, 0x10, 0x87, 0xD0, 0x03, 0x00, 0x00
                 }; // patched bytes from the asm above
 
                 // Create Codecave
@@ -1934,7 +1932,7 @@ namespace SWTOR_External
                 m.WriteBytes(speedHackAddrString, speedBytes);
                 speedPatched = false;
 
-                m.WriteMemory(nofallAddrString, "bytes", "F3 44 0F 10 4F 10 44 0F 28 DF");
+                m.WriteMemory(nofallAddrString, "bytes", nofallAOB);
                 nofallEnabled = false;
 
                 m.WriteMemory(glideAddrString, "bytes", glideAOB);
