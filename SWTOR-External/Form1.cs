@@ -419,9 +419,9 @@ namespace SWTOR_External
                             throwBackSaved = true;
                         }
 
-                        m.WriteMemory(xAddrString, "float", throwSavedX.ToString());
-                        m.WriteMemory(yAddrString, "float", throwSavedY.ToString());
-                        m.WriteMemory(zAddrString, "float", throwSavedZ.ToString());
+                        m.WriteMemory(xAddrString, "float", throwSavedX.ToString(CultureInfo.InvariantCulture));
+                        m.WriteMemory(yAddrString, "float", throwSavedY.ToString(CultureInfo.InvariantCulture));
+                        m.WriteMemory(zAddrString, "float", throwSavedZ.ToString(CultureInfo.InvariantCulture));
                     }
                     else
                     {
