@@ -477,7 +477,7 @@ namespace SWTOR_External
 
                 // readValue & convert to hex string
                 var playerBaselong = m.ReadLong(PbaseUintString);
-                PlayerBaseAddress = playerBaselong.ToString("X2");
+                PlayerBaseAddress = playerBaselong.ToString("X2",CultureInfo.InvariantCulture);
                 playerBaseUInt = ParseHexToUIntPtr(PlayerBaseAddress);
             }
             catch
@@ -1021,22 +1021,22 @@ namespace SWTOR_External
                 var moduleStartLong = long.Parse(moduleStart.ToString()); //parse it to long
                 var moduleEndLong = moduleStartLong + 10000000;
 
-                infJumpAddrStr = m.AoBScan(infJumpAOB).Result.Sum().ToString("X2");
-                noclipAddressStr = m.AoBScan(noclipAOB).Result.Sum().ToString("X2");
-                cameraAddress = m.AoBScan(moduleStartLong, moduleEndLong, cameraAOB).Result.Sum().ToString("X2");
-                cameraZAddress = m.AoBScan(cameraZAOB).Result.Sum().ToString("X2");
-                cameraYAddress = m.AoBScan(cameraYAOB).Result.Sum().ToString("X2");
-                nofallAddrString = m.AoBScan(nofallAOB).Result.Sum().ToString("X2");
-                speedHackAddrString = m.AoBScan(speedHackAOB).Result.Sum().ToString("X2");
-                devESPAddrString = m.AoBScan(devESPAob).Result.Sum().ToString("X2");
-                velocityIndAddrStr = m.AoBScan(velocityIndicatorAOB).Result.Sum().ToString("X2");
-                glideAddrString = m.AoBScan(glideAOB).Result.Sum().ToString("X2");
-                wallhackAddress = m.AoBScan(wallhackAOB).Result.Sum().ToString("X2");
-                wallhack2Address = m.AoBScan(wallhack2AOB).Result.Sum().ToString("X2");
-                infReachAddressStr = m.AoBScan(infReachAOB).Result.Sum().ToString("X2");
-                camCollisionAddrStr = m.AoBScan(camCollisionAOB).Result.Sum().ToString("X2");
-                noAnimationAddrString = m.AoBScan(noAnimationAOB).Result.Sum().ToString("X2");
-                stuckAddrStr = m.AoBScan(stuckAOB).Result.Sum().ToString("X2");
+                infJumpAddrStr = m.AoBScan(infJumpAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                noclipAddressStr = m.AoBScan(noclipAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                cameraAddress = m.AoBScan(moduleStartLong, moduleEndLong, cameraAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                cameraZAddress = m.AoBScan(cameraZAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                cameraYAddress = m.AoBScan(cameraYAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                nofallAddrString = m.AoBScan(nofallAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                speedHackAddrString = m.AoBScan(speedHackAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                devESPAddrString = m.AoBScan(devESPAob).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                velocityIndAddrStr = m.AoBScan(velocityIndicatorAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                glideAddrString = m.AoBScan(glideAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                wallhackAddress = m.AoBScan(wallhackAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                wallhack2Address = m.AoBScan(wallhack2AOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                infReachAddressStr = m.AoBScan(infReachAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                camCollisionAddrStr = m.AoBScan(camCollisionAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                noAnimationAddrString = m.AoBScan(noAnimationAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
+                stuckAddrStr = m.AoBScan(stuckAOB).Result.Sum().ToString("X2", CultureInfo.InvariantCulture);
 
                 stuckAddrUint = m.Get64BitCode(stuckAddrStr);
                 cameraYUInt = m.Get64BitCode(cameraYAddress);
@@ -1068,28 +1068,28 @@ namespace SWTOR_External
 
         private void Freecam()
         {
-            var pitch = m.ReadFloat(pitchAddrString);
-            var yaw = m.ReadFloat(yawAddrString);
+            float pitch = m.ReadFloat(pitchAddrString);
+            float yaw = m.ReadFloat(yawAddrString);
 
-            var siny = (float)Math.Sin(yaw);
-            var cosy = (float)Math.Cos(yaw);
-            var sinp = (float)Math.Sin(pitch);
-            var cosp = (float)Math.Cos(pitch);
+            float siny = (float)Math.Sin(yaw);
+            float cosy = (float)Math.Cos(yaw);
+            float sinp = (float)Math.Sin(pitch);
+            float cosp = (float)Math.Cos(pitch);
 
-            var camx = m.ReadFloat(xCamAddrString);
-            var camy = m.ReadFloat(yCamAddrString);
-            var camz = m.ReadFloat(zCamAddrString);
+            float camx = m.ReadFloat(xCamAddrString);
+            float camy = m.ReadFloat(yCamAddrString);
+            float camz = m.ReadFloat(zCamAddrString);
 
             float speedX = 0;
             float speedY = 0;
             float speedZ = 0;
 
-            var speed = camSpeed;
+            float speed = camSpeed;
 
             if (isSpeedBoostActive) speed *= speedBoostMultiplier;
 
-            var isArrowUpPressed = sim.InputDeviceState.IsHardwareKeyDown(forwardsKey);
-            var isArrowDownPressed = sim.InputDeviceState.IsHardwareKeyDown(backwardsKey);
+            bool isArrowUpPressed = sim.InputDeviceState.IsHardwareKeyDown(forwardsKey);
+            bool isArrowDownPressed = sim.InputDeviceState.IsHardwareKeyDown(backwardsKey);
 
             if (isArrowUpPressed)
             {
@@ -1119,9 +1119,9 @@ namespace SWTOR_External
             camz += speedZ;
 
             // Ensure the float values are converted to strings using the invariant culture
-            var camxString = camx.ToString(CultureInfo.InvariantCulture);
-            var camyString = camy.ToString(CultureInfo.InvariantCulture);
-            var camzString = camz.ToString(CultureInfo.InvariantCulture);
+            string camxString = camx.ToString(CultureInfo.InvariantCulture);
+            string camyString = camy.ToString(CultureInfo.InvariantCulture);
+            string camzString = camz.ToString(CultureInfo.InvariantCulture);
 
             // Write the memory
             m.WriteMemory(xCamAddrString, "float", camxString);
@@ -1330,9 +1330,9 @@ namespace SWTOR_External
 
         private string convertUintToHexString(UIntPtr uintToConvert)
         {
-            var placeholder1 = uintToConvert.ToString();
-            var placeholder2 = long.Parse(placeholder1);
-            var hexstring = placeholder2.ToString("X2");
+            string placeholder1 = ((ulong)uintToConvert).ToString(CultureInfo.InvariantCulture);
+            var placeholder2 = ulong.Parse(placeholder1);
+            var hexstring = placeholder2.ToString("X2",CultureInfo.InvariantCulture);
             return hexstring;
         }
 
@@ -1585,7 +1585,7 @@ namespace SWTOR_External
 
                 // readValue & convert to hex string
                 var camBaselong = m.ReadLong(CambaseUIntString);
-                CamBaseAddress = camBaselong.ToString("X2");
+                CamBaseAddress = camBaselong.ToString("X2", CultureInfo.InvariantCulture);
                 camBaseUInt = ParseHexToUIntPtr(CamBaseAddress);
 
                 // log to console

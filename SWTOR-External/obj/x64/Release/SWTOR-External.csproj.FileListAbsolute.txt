@@ -85,7 +85,6 @@ C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\b
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\bin\x64\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\bin\x64\Release\WindowsInput.xml
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.csproj.AssemblyReference.cache
-C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.csproj.SuggestedBindingRedirects.cache
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.exe.config
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR_External.Form1.resources
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR_External.Properties.Resources.resources
@@ -95,3 +94,4 @@ C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\o
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-Ex.F4DBA39C.Up2Date
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.exe
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.pdb
+C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\bin\x64\Release\Memory.xml
