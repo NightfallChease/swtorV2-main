@@ -94,4 +94,3 @@ C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\o
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-Ex.F4DBA39C.Up2Date
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.exe
 C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\obj\x64\Release\SWTOR-External.pdb
-C:\Users\nightfall\Documents\Coding\!MyProjects\C#\swtorV2-main\SWTOR-External\bin\x64\Release\Memory.xml
