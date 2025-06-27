@@ -169,7 +169,7 @@ namespace SWTOR_External
         private readonly string wallhackAOB = "74 0D 83 4B 68 01";
         private readonly string wallhack2AOB = "0F 84 76 02 00 00 49 8B CE";
         private readonly string infReachAOB = "67 FD FF 8B 06 89 07 41 80 0F 0C";
-        private readonly string camCollisionAOB = "F3 0F 11 8F ?? ?? 00 00 0F B6 4F ??";
+        private readonly string camCollisionAOB = "74 08 F3 0F 11 8F ?? ?? 00 00 0F B6 4F 58";
         private string camCollisionAddrStr;
         private bool camCollisionEnabled;
         private bool infReachEnabled;
@@ -888,14 +888,13 @@ namespace SWTOR_External
         {
             if (!camCollisionEnabled)
             {
+                m.WriteMemory(camCollisionAddrStr, "bytes", "EB 08");
                 camCollisionEnabled = true;
-
-                m.WriteMemory(camCollisionAddrStr, "bytes", "90 90 90 90 90 90 90 90");
             }
             else
             {
+                m.WriteMemory(camCollisionAddrStr, "bytes", "74 08");
                 camCollisionEnabled = false;
-                m.WriteMemory(camCollisionAddrStr, "bytes", "F3 0F 11 8F 50 03 00 00");
             }
         }
 
@@ -1938,7 +1937,7 @@ namespace SWTOR_External
                 m.WriteMemory(glideAddrString, "bytes", glideAOB);
                 glideEnabled = false;
 
-                m.WriteMemory(camCollisionAddrStr, "bytes", "F3 0F 11 8F 50 03 00 00");
+                m.WriteMemory(camCollisionAddrStr, "bytes", "74 08");
                 camCollisionEnabled = false;
 
                 m.WriteMemory(noAnimationAddrString, "bytes", "F3 0F 11 8B 70 02 00 00");
